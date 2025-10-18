@@ -1,15 +1,95 @@
+@font-face {
+  font-family: "riffic free";
+  src: url("font/RifficFree-Bold.ttf");
+}
+
 .container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 30px;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.container.show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.container2 {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.sigma {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-top: 70px;
+  user-select: none;
 }
 
 body {
   background-image: linear-gradient(cyan, rgb(198, 198, 255));
   display: block;
   background-attachment: fixed;
+  overflow-y: hidden;
+}
+
+.sigma input {
+  padding: 0 20px;
+  height: 80px;
+  font-size: 20px;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border: none;
+  box-shadow: 0 5px rgba(0, 0, 0, 0.109);
+  width: 450px;
+}
+
+input::placeholder {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  color: rgb(191, 191, 191);
+}
+
+input:focus {
+  outline-width: 0;
+}
+
+.sigma button {
+  height: 80px;
+  padding: 0 30px;
+  font-size: 24px;
+  cursor: pointer;
+  background-color: #ffffff;
+  border: none;
+  box-shadow: 0 5px rgba(0, 0, 0, 0.109);
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+}
+
+button:active {
+  box-shadow: 0 5px rgba(0, 0, 0, 0.179);
+  transform: translateY(2px);
+}
+
+.sigma button img {
+  display: block;
+  height: 30px;
+  opacity: 0.4;
 }
 
 .titolo {
@@ -19,27 +99,105 @@ body {
   font-size: 70px;
   text-shadow: 0 7px rgba(0, 0, 0, 0.109);
   margin-bottom: 10px;
-  margin-top: 10px;
+  margin-top: 0px;
 }
 
-.punti {
+.inserire {
   color: rgb(255, 255, 255);
   text-align: center;
   font-family: "riffic free";
-  font-size: 50px;
+  font-size: 70px;
   text-shadow: 0 7px rgba(0, 0, 0, 0.109);
   margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.inserire2 {
+  color: rgb(255, 255, 255);
+  text-align: center;
+  font-family: "riffic free";
+  font-size: 70px;
+  text-shadow: 0 7px rgba(0, 0, 0, 0.109);
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.giocatore {
+  color: rgb(255, 255, 255);
+  text-align: center;
+  font-family: "riffic free";
+  font-size: 70px;
+  text-shadow: 0 7px rgba(0, 0, 0, 0.109);
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.giocatore2 {
+  color: rgb(255, 255, 255);
+  text-align: center;
+  font-family: "riffic free";
+  font-size: 70px;
+  text-shadow: 0 7px rgba(0, 0, 0, 0.109);
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.score-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 60px;
+  margin-top: 10px;
+}
+
+.player1-group,
+.player2-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.player1,
+.player2,
+.punti {
+  color: rgb(255, 255, 255);
+  font-family: "riffic free";
+  font-size: 40px;
+  text-shadow: 0 7px rgba(0, 0, 0, 0.109);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.player1.show,
+.player2.show,
+.punti.show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+#vittoria {
+  position: absolute;
+  margin-bottom: 10px;
+  top: 140px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  width: max-content;
 }
 
 .flip-card {
   background-color: transparent;
-  width: 230px;
-  height: 230px;
+  width: 200px;
+  height: 200px;
   border: none;
   perspective: 1000px;
   user-select: none;
   cursor: pointer;
   margin-right: 50px;
+  overflow: visible;
 }
 
 .flip-card-inner {
@@ -50,6 +208,7 @@ body {
   transition: transform 0.8s;
   transform-style: preserve-3d;
   user-select: none;
+  will-change: transform;
 }
 
 .flip-card.flipped .flip-card-inner {
@@ -71,21 +230,35 @@ body {
   text-align: center;
   font-family: "riffic free";
   border-radius: 10px;
+  transition: 0.3s;
+  transform-origin: center;
 }
 
 .flip-card-back {
   background-color: dodgerblue;
-  transform: rotateY(-180deg);
   border-radius: 10px;
+  transform-origin: center;
+  transform: rotateY(-180deg);
+  transition: 0.3s;
+}
+
+.flip-card-front:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.flip-card-back:hover {
+  transform: rotateY(-180deg) scale(1.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .coppia1,
 .coppia2 {
-  max-width: 230px;
-  max-height: 230px;
+  max-width: 200px;
+  max-height: 200px;
 }
 
 .scritta {
-  margin-top: 100px;
+  margin-top: 90px;
   text-align: center;
 }
