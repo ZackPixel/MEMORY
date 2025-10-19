@@ -74,7 +74,6 @@ function invio() {
       .querySelectorAll(".player1, .player2")
       .forEach((el) => el.classList.add("show"));
 
-    // Imposta turno iniziale
     document.getElementById("vittoria").innerHTML = `${nome1}'s turn!`;
   }
 }
