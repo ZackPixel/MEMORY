@@ -209,10 +209,7 @@ button:active {
   transform-style: preserve-3d;
   user-select: none;
   will-change: transform;
-}
-
-.flip-card.flipped .flip-card-inner {
-  transform: rotateY(-180deg);
+  backface-visibility: hidden;
 }
 
 .flip-card-front,
@@ -222,6 +219,11 @@ button:active {
   height: 100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
 }
 
 .flip-card-front {
@@ -250,6 +252,10 @@ button:active {
 .flip-card-back:hover {
   transform: rotateY(-180deg) scale(1.1);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.flip-card-back img {
+  transform: translateZ(1px);
 }
 
 .coppia1,
